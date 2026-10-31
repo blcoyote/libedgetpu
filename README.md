@@ -4,6 +4,25 @@ This repo contains the source code for the userspace
 level runtime driver for [Coral devices](https://coral.ai/products).
 This software is distributed in the binary form at [coral.ai/software](https://coral.ai/software/).
 
+## Installing on Raspberry Pi OS (Bookworm and Trixie)
+
+Pick the `.deb` matching your OS from this fork's Releases page (`.bookworm_arm64.deb` for Debian 12 / Raspberry Pi OS Bookworm, `.trixie_arm64.deb` for Debian 13 / Trixie), then:
+
+```
+sudo apt install ./libedgetpu1-std_<version>.<distro>_arm64.deb
+```
+
+Check which one you are on with `grep VERSION_CODENAME /etc/os-release`. The USB Accelerator does not need the gasket driver (that is only for PCIe/M.2 cards).
+
+The Python side must come from the same TensorFlow release as the library: Bookworm ships Python 3.11 and Trixie ships Python 3.13. Wheels for `tflite_runtime` and `pycoral` from the [feranick forks](https://github.com/feranick/pycoral) cover specific Python versions only, so check that a wheel exists for your interpreter, or use a virtual environment with a supported Python version.
+
+To build the packages yourself for both distros, run the **Build Debian packages** workflow under the Actions tab (or push a tag such as `16.0tf2.19.1-1` to also create a release). Locally:
+
+```
+DOCKER_CPUS="aarch64" DOCKER_IMAGE="debian:bookworm" DOCKER_TARGETS=libedgetpu make docker-build
+DOCKER_CPUS="aarch64" DOCKER_IMAGE="debian:trixie"   DOCKER_TARGETS=libedgetpu make docker-build
+```
+
 ## Building
 
 There are three ways to build libedgetpu:
