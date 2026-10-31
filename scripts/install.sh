@@ -167,7 +167,7 @@ if [[ "${CPU}" == darwin* ]]; then
                             "${DARWIN_INSTALL_LIB_DIR}/libusb-1.0.0.dylib" \
                             "${LIBEDGETPU_LIB_DIR}/libedgetpu.1.0.dylib"
 else
-  for pkg in libc6 libgcc1 libstdc++6 libusb-1.0-0; do
+  for pkg in libc6 libgcc-s1 libstdc++6 libusb-1.0-0; do
     if ! dpkg -l "${pkg}" > /dev/null; then
       PACKAGES+=" ${pkg}"
     fi

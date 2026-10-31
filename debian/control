@@ -13,7 +13,7 @@ Priority: optional
 Architecture: any
 Multi-Arch: same
 Depends: libc6,
-         libgcc1,
+         libgcc-s1 | libgcc1,
          libstdc++6,
          libusb-1.0-0,
          ${misc:Depends}
@@ -28,7 +28,7 @@ Priority: optional
 Architecture: any
 Multi-Arch: same
 Depends: libc6,
-         libgcc1,
+         libgcc-s1 | libgcc1,
          libstdc++6,
          libusb-1.0-0,
          ${misc:Depends}
